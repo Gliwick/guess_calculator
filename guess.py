@@ -78,7 +78,7 @@ def print_prize_list(prize, winners):
 tours = dict()
 tours_list = []
 
-guess_file = open("guess.txt")
+guess_file = open("data/guess.txt")
 guesses = []
 for guess in guess_file:
 	guesses.append(guess.rstrip().split('\t'))
@@ -87,15 +87,20 @@ for guess in guess_file:
 		tours_list.append(guesses[-1][1])
 guess_file.close()
 
-winner_file = open("winners.txt")
+winner_file = open("data/winners.txt")
 for name in tours_list:
 	tours[name]['num'] = int(winner_file.readline().rstrip())
 	tours[name]['winner'] = dict()
 	for i in range(min(8, tours[name]['num'])):
-		tours[name]['winner'][winner_file.readline().split('\t')[1].rstrip()] = i + 1
+        s = winner_file.readline()
+        if '\t' in s:
+            winner_name = s.split('\t')[1]
+        else:
+            winner_name = s
+		tours[name]['winner'][winner_name.rstrip()] = i + 1
 winner_file.close()
 
-late_file = open("late.txt")
+late_file = open("data/late.txt")
 late = set()
 for s in late_file:
 	if len(s.rstrip()) > 0:
@@ -145,7 +150,7 @@ for tour in tours:
 		if tour in points[user]:
 			print(user, points[user][tour])
 
-prize_file = open("prizes.txt")
+prize_file = open("data/prizes.txt")
 prizes = {'candy': []}
 for s in prize_file:
 	num = int(s.split('. ')[0])
@@ -171,6 +176,8 @@ for s in prize_file:
 	elif num in {6, 7}:
 		prizes['candy'].append(s.split(' (')[0])
 prize_file.close()
+if len(prizes['candy'] == 1)"
+    prizes['candy'].append(prizes['candy'][0])
 
 legend = set()
 pokemon = set()
