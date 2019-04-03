@@ -92,11 +92,11 @@ for name in tours_list:
 	tours[name]['num'] = int(winner_file.readline().rstrip())
 	tours[name]['winner'] = dict()
 	for i in range(min(8, tours[name]['num'])):
-        s = winner_file.readline()
-        if '\t' in s:
-            winner_name = s.split('\t')[1]
-        else:
-            winner_name = s
+		s = winner_file.readline()
+		if '\t' in s:
+			winner_name = s.split('\t')[1]
+		else:
+			winner_name = s
 		tours[name]['winner'][winner_name.rstrip()] = i + 1
 winner_file.close()
 
@@ -176,8 +176,8 @@ for s in prize_file:
 	elif num in {6, 7}:
 		prizes['candy'].append(s.split(' (')[0])
 prize_file.close()
-if len(prizes['candy'] == 1)"
-    prizes['candy'].append(prizes['candy'][0])
+if len(prizes['candy']) == 1:
+	prizes['candy'].append(prizes['candy'][0])
 
 legend = set()
 pokemon = set()
